@@ -1,0 +1,159 @@
+<!--
+Landing Page 1: Pricing Plan Page (monthly/annual toggle, CTA only)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CallApp Business Pricing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #1f2335;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+    }
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    .toggle-container button {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .toggle-container button.active {
+      background: #00bfa5;
+      color: white;
+      border-color: #00bfa5;
+    }
+    .plans {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+    .plan {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 280px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .plan h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .price {
+      font-size: 2rem;
+      margin: 1rem 0;
+      color: #00bfa5;
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+    .features li {
+      margin-bottom: 0.5rem;
+    }
+    .plan a {
+      display: inline-block;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      background: #1f2335;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (placeholder) -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');
+</script>
+<!-- End Google Tag Manager -->
+
+<header>
+  <img src="https://callapp.com/wp-content/uploads/2025/04/ic_logo_callapp_for_business.png" alt="CallApp for Business" style="max-width: 300px; height: auto;" />
+<!--  <h2>Choose Your Pricing Plan</h2>-->
+</header>
+<div class="toggle-container">
+  <button id="monthlyBtn" class="active">Monthly</button>
+  <button id="annualBtn">Annual</button>
+</div>
+<div class="plans" id="plansContainer"></div>
+
+<script>
+const plans = {
+  monthly: [
+    { name: "Basic plan", price: "$99/month", description: "1 business number" },
+    { name: "Mid plan", price: "$249/month", description: "Up to 5 business numbers" },
+    { name: "Combo plan", price: "$449/month", description: "Up to 20 business numbers" },
+  ],
+  annual: [
+    { name: "Basic plan", price: "$75/month", description: "1 business number (billed annually)" },
+    { name: "Mid plan", price: "$199/month", description: "Up to 5 business numbers (billed annually)" },
+    { name: "Combo plan", price: "$359/month", description: "Up to 20 business numbers (billed annually)" },
+  ]
+};
+
+const container = document.getElementById('plansContainer');
+const monthlyBtn = document.getElementById('monthlyBtn');
+const annualBtn = document.getElementById('annualBtn');
+
+function renderPlans(type) {
+  container.innerHTML = '';
+  plans[type].forEach(plan => {
+    const div = document.createElement('div');
+    div.className = 'plan';
+    div.innerHTML = `
+      <h2>${plan.name}</h2>
+      <p>${plan.description}</p>
+      <div class="price">${plan.price}</div>
+      <ul class="features">
+        <li>✔ Verified call ID badge</li>
+        <li>✔ Verified message ID</li>
+        <li>✔ Business customization</li>
+      </ul>
+      <a href="https://business.callapp.com">Buy now</a>
+    `;
+    container.appendChild(div);
+  });
+}
+
+monthlyBtn.onclick = () => {
+  monthlyBtn.classList.add('active');
+  annualBtn.classList.remove('active');
+  renderPlans('monthly');
+};
+annualBtn.onclick = () => {
+  annualBtn.classList.remove('active');
+  monthlyBtn.classList.remove('active');
+  annualBtn.classList.add('active');
+  renderPlans('annual');
+};
+
+renderPlans('monthly');
+</script>
+
+</body>
+</html>
